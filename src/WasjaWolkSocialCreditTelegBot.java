@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
+
+  WasjaWolk wasjaWolk = new WasjaWolk();
+
   @Override
   public String getBotUsername() {
     Dotenv dotenv = Dotenv.configure().load();
@@ -30,7 +33,7 @@ public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
       Message message = update.getMessage();
       String message_text = message.getText();
 
-      WasjaWolk wasjaWolk = new WasjaWolk();
+
       boolean isWasjaWolk = isWasjaWolk(message, wasjaWolk);
       boolean hasAnswer = false;
 
@@ -53,8 +56,12 @@ public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
           "'s social credits so often, it's easy to wonder how many extra bowls of rice he has. " +
           "Therefore, I was created so that you can precisely follow this indicator and change it :).");
       }
+
       if (message_text.equals("plus") && !isWasjaWolk) {
         hasAnswer = true;
+
+        wasjaWolk.set_socialCredits(wasjaWolk.get_socialCredits() + 1000);
+
         sendMessage.setText("@" + wasjaWolk.getUserName() + " My congratulations, your social rating has been increased :)\n" +
           "Now it is:\n" +
           wasjaWolk.get_socialCredits());
@@ -66,6 +73,9 @@ public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
 
       if (message_text.equals("minus") && !isWasjaWolk) {
         hasAnswer = true;
+
+        wasjaWolk.set_socialCredits(wasjaWolk.get_socialCredits() - 1000);
+
         sendMessage.setText("@" + wasjaWolk.getUserName() + " It's a shame, your social credits has been lowered :(\n" +
           "Now it is:\n" +
           wasjaWolk.get_socialCredits());
@@ -75,7 +85,7 @@ public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
         sendMessage.setText("Danya, don't think that you can change your social rating");
       }
 
-      if (message_text.equals("/credits")) {
+      if (message_text.equals("social credits")) {
         hasAnswer = true;
         sendMessage.setText("@" + wasjaWolk.getUserName() + "\n" +
           "Your social credits\n" +
