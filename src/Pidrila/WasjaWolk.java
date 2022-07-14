@@ -15,7 +15,7 @@ import java.io.IOException;
 public class WasjaWolk {
   long _id;
   String _user_name;
-  long _socialCredit;
+  long _socialCredits;
 
   public WasjaWolk(){
     File file = new File("wasja_wolk.xml");
@@ -44,7 +44,7 @@ public class WasjaWolk {
         Element eElement = (Element) node;
         _id = Long.parseLong(eElement.getElementsByTagName("id").item(0).getTextContent());
         _user_name = eElement.getElementsByTagName("username").item(0).getTextContent();
-        _socialCredit = Long.parseLong(eElement.getElementsByTagName("social_credit").item(0).getTextContent());
+        _socialCredits = Long.parseLong(eElement.getElementsByTagName("social_credit").item(0).getTextContent());
       }
     }
   }
@@ -56,8 +56,8 @@ public class WasjaWolk {
     return _user_name;
   }
 
-  public long get_socialCredit() {
-    return _socialCredit;
+  public long get_socialCredits() {
+    return _socialCredits;
   }
 
   public void set_socialCredit(){
