@@ -49,7 +49,7 @@ public class WasjaWolk {
     }
   }
   public long getId() {
-    return getId();
+    return _id;
   }
 
   public String getUserName() {

@@ -27,6 +27,7 @@ public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
   public void onUpdateReceived(Update update) {
     if (update.hasMessage() && update.getMessage().hasText()) {
       WasjaWolk wasjaWolk = new WasjaWolk();
+      long wasjaWolkID = wasjaWolk.getId();
       Message message = update.getMessage();
       String userName = message.getChat().getUserName();
       long id = message.getChat().getId();
@@ -41,7 +42,7 @@ public class WasjaWolkSocialCreditTelegBot extends TelegramLongPollingBot {
 
       System.out.println(update.getMessage());
 
-      if (userName.equals(wasjaWolk.getUserName()) || id == wasjaWolk.getId()){
+      if (userName.equals(wasjaWolk.getUserName()) || id == wasjaWolkID){
 
         sendMessage.setText("Danya, don't think that you can change your social rating");
       } else {
